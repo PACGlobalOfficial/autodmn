@@ -6,7 +6,13 @@ import os, time, requests, json, sys
 # barrystyle
 
 collateral = 500000
-hostipaddr = sys.argv[1]
+
+# test for argv
+try:
+   hostipaddr = sys.argv[1]
+except:
+   print ('autodmn usage:\n\nautodmn.py3 host-ip-addr:port')
+   sys.exit()
 
 class RPCHost(object):
     def __init__(self, url):
