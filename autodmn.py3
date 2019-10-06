@@ -5,7 +5,15 @@ import os, time, requests, json, sys
 # autodmn (for pac)
 # barrystyle
 
-collateral = 500000
+mainnet = True
+masternodeindex = 0
+
+if mainnet == False:
+   collateral = 5000
+   rpcport = 19998
+else:
+   collateral = 500000
+   rpcport = 9998
 
 # test for argv
 try:
@@ -30,7 +38,7 @@ class RPCHost(object):
            return False
 
 def senddaemoncmd(payload,params):
-    rpchandler = RPCHost("http://testuser:testpass@127.0.0.1:9998")
+    rpchandler = RPCHost("http://testuser:testpass@127.0.0.1:"+str(rpcport))
     return rpchandler.call(payload,params)
 
 def locatecollateral():
@@ -91,7 +99,7 @@ print ('')
 
 print ('Setting up DIP0003 masternode at '+hostipaddr)
 
-protx_params = buildprotx(0)
+protx_params = buildprotx(masternodeindex)
 protx_response = senddaemoncmd('protx', (protx_params))
 protx_message = protx_response['tx']
 collateral_addr = protx_response['collateralAddress']
