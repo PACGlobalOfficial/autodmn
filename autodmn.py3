@@ -75,7 +75,8 @@ def buildprotx(mnnumber):
         itemamt   = (str(item) + '\n').replace('[','').replace(']','').split(',')[1]
         testamt = int(itemamt.split('.')[0])
         if testamt != collateral:
-           break
+           if testamt > 0:
+              break
 
     fundaddress = iteminput.replace('\'','')
     owneraddr = generateaddresses()
